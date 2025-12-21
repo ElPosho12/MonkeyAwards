@@ -6,6 +6,12 @@ body{
   margin:0;
 }
 
+main {
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
 header{
   text-align:center;
   padding:20px;
@@ -48,10 +54,6 @@ header{
 .card-option:hover{
   transform: scale(1.07);
   box-shadow: 0 12px 12px rgba(0,0,0,0.25);
-}
-
-.card-option input{
-  display:none;
 }
 
 .actions{
@@ -170,14 +172,6 @@ footer {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.vote-info {
-  font-size: 14px;
-  opacity: .8;
-  margin-top: -10px;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
 /* --- SLIDE INICIAL (NOMBRE → VOTACIÓN) --- */
 .start-exit {
   opacity: 1;
@@ -257,10 +251,533 @@ footer {
   color: #d8a415;
 }
 
-.clip-link {
-  color: #8ab4ff;
+.vote-info {
+  text-align: center;
+  margin: 10px 0 25px 0;
+  font-size: 19px;
+  color: #d8a415;
+  font-weight: 500;
+}
+
+
+.category-subtitle {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #d8a415;
+  font-weight: 500;
+}
+
+.option-card.selected .option-title {
+  color: #1b1b1b; /* negro */
+  font-weight: 300;
+}
+
+.card-option.selected .clip-title {
+  color: #1b1b1b;
+  font-weight: 700;
+}
+
+.card-option.selected span {
+  color: #1b1b1b;
+  font-weight: 700;
+}
+
+/* Cambiar botón Ver clip a negro cuando está seleccionado */
+.card-option.selected .clip-button {
+  background: #222 !important;
+  color: #d8a415 !important;
+}
+
+/* ===========================
+   PANTALLA FINAL (overlay)
+   =========================== */
+
+#final-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.65);
+  z-index: 9999;
+
+  /* clave: el overlay NO captura los clicks; solo el contenido lo hará */
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+/* oculto por defecto (no ocupa ni bloquea) */
+.final-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* cuando queremos mostrarlo: overlay visible pero sigue sin bloquear clics abajo */
+#final-screen.final-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none; /* importante: overlay sigue sin capturar clicks */
+}
+
+/* el contenido SÍ captura los clicks (botones internos, reproducción, etc.) */
+#final-screen .final-content {
+  pointer-events: auto; /* el único elemento que recibe interacciones */
+  text-align: center;
+  transform: scale(0.85);
+  animation: zoomIn 0.45s ease forwards;
+  color: #fff;
+}
+
+/* zoom */
+@keyframes zoomIn {
+  to { transform: scale(1); }
+}
+
+/* SVG / check styling (puedes ajustar tamaño) */
+.check-wrapper { width: 140px; height: 140px; margin: 0 auto 16px; }
+.check-circle-bg { fill: #d8a415; }
+.check-path {
+  stroke: #222;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: drawCheck 0.6s ease forwards 0.25s;
+}
+@keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+.final-title {
+  font-size: 28px;
+  margin-top: 6px;
+  color: #d8a415;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards 0.6s;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+.final-content {
+  pointer-events: auto;
+  transition: opacity 1s ease;
+}
+
+.final-content.fade-out {
+  opacity: 0;
+}
+
+/* Texto final fijo */
+.final-thanks {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
   text-decoration: underline;
+  font-size: 24px;
+  color: #d8a415;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.final-thanks.show {
+  opacity: 1;
+}
+
+.footer-button{
+  font-family:"Montserrat", sans-serif;
+  border: 4px, solid #a07a10 ;
+}
+
+.footer-button:hover{
+border: solid #c4a03d;
+background-color: #eecb4a;
+box-shadow: 0, 12px, 12px rgba(0,0,0,0.25);
+}
+
+.lyrics-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lyrics-modal.final-visible {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.lyrics-content {
+  background: #333;
+  color: #d8a415;
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  text-align: left;
+  position: relative;
+}
+
+.close-lyrics {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid #d8a415;
+  border-radius: 15px;
+  color: #d8a415;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.lyrics-content pre {
+  white-space: pre-wrap;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.4;
+}
+
+.song-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* =========================
+   SONG CARD FIX
+   ========================= */
+
+.card-option {
+  overflow: visible !important;
+  padding-bottom: 22px;
+}
+
+/* =========================
+   VOLUME CONTROL
+   ========================= */
+
+/* =========================
+   VOLUME SLIDER SIMPLE
+   ========================= */
+
+.volume-slider {
+  width: 140px;
+  height: 6px;
+  margin-top: 10px;
+
+  appearance: none;
+  background: rgba(216,164,21,0.35);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* Thumb (la pelotita) */
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #d8a415;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #d8a415;
+  cursor: pointer;
+}
+
+
+
+/* =========================
+   BOTONES DENTRO DE CARD SELECCIONADA
+   ========================= */
+.card-option.selected button,
+.card-option.selected .clip-button,
+.card-option.selected .play-btn {
+  background-color: #222 !important;
+  color: #d8a415 !important;
+}
+
+/* Hover mientras está seleccionada */
+.card-option.selected button:hover,
+.card-option.selected .clip-button:hover,
+.card-option.selected .play-btn:hover {
+  background-color: #222 !important;
+  color: #d8a415 !important;
+  transform: scale(1.05);
+}
+
+.play-btn,
+.lyrics-button {
+  border-radius: 8px;
+  height: 45px;
+}
+
+body{
+  background:#222;
+  color:#d8a415;
+  font-family:"Montserrat", sans-serif;
+  text-align: center;
+  margin:0;
+}
+
+header{
+  text-align:center;
+  padding:20px;
+  background:#222;
+}
+
+.category{
+  background:#333;
+  padding:25px;
+  border-radius:10px;
+  margin:20px;
+}
+
+.options-grid{
+  display: flex;
+  flex-wrap: wrap;          /* Permite bajar elementos de línea */
+  justify-content: center;  /* Centra horizontalmente cada fila */
+  gap: 50px;                /* Ajusta el espacio entre opciones */
+  margin-top: 15px;
+  
+}
+
+.card-option{
+  background:#444;
+  border:2px solid #d8a415;
+  border-radius:10px;
+  padding:25px 90px;
+  text-align:center;
+  cursor:pointer;
+  transition: transform .15s, background .15s, border-color .15s;
+}
+
+.card-option.selected{
+  background:#d8a415;
+  color:#222;
+  border-color:#ffdd55;
+  transform: scale(1.05);
+}
+
+.card-option:hover{
+  transform: scale(1.07);
+  box-shadow: 0 12px 12px rgba(0,0,0,0.25);
+}
+
+.actions{
+  text-align:center;
+  margin-top:20px;
+}
+
+button{
+  display:inline-block;
+  background:#d8a415;
+  border: none;
+  padding:12px 18px;
+  border-radius:25px;
+  color:#222;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+button:hover{
+transform: scale(1.2);
+box-shadow: 0 12px 12px rgba(0,0,0,0.25);
+}
+footer {
+  max-width: 960px;
+  margin: 100px auto;
+  padding: 0 16px;
+  color: #666;
+  text-align: center;
   font-size: 15px;
+
+}
+
+.admin{
+  display: inline-block;
+  padding: 8px;
+  border: 2px solid#d8a415;
+  border-radius: 20px;
+  background-color:  #a07a10;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin:hover{
+  transform: scale(1.1);
+  box-shadow: 0 12px 12px rgba(0,0,0,0.25);
+}
+
+/* ============================
+      NOTIFICACIONES DESLIZABLES
+   ============================ */
+
+#notifyBox {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90%;
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 17px;
+  text-align: center;
+  transition: top 0.4s ease;
+  z-index: 9999;
+  opacity: 0.95;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Tipos */
+.notify-error {
+  background: #d9534f;
+}
+
+.notify-success {
+  background: #5cb85c;
+}
+
+/* Estado visible */
+.notify-show {
+  top: 20px !important;
+}
+
+.option-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 2px solid rgba(216,164,21,0.15);
+  transition: transform .2s;
+}
+
+.card-option.selected .option-img {
+  transform: scale(1.05);
+  border-color: #ffdd55;
+}
+
+/* ----- ANIMACIÓN DE SLIDE ----- */
+
+.slide-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 250px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 9999;
+}
+
+.slide-image.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* --- SLIDE INICIAL (NOMBRE → VOTACIÓN) --- */
+.start-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+.start-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.start-enter {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.start-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+/* --- SLIDE NORMAL ENTRE CATEGORÍAS --- */
+.slide-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-exit-active {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateX(40px);
+}
+.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.clip-button {
+  margin-top: 6px;
+  padding: 8px 14px;
+  background: #d8a415;
+  border: none;
+  border-radius: 6px;
+  color: #1b1b1b;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.clip-button:hover {
+  background: #f8c531;
+  transform: scale(1.05);
+}
+
+.clip-button:active {
+  transform: scale(0.97);
+}
+
+.card-clip {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding: 20px 50px;
+}
+
+.clip-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #d8a415;
 }
 
 .vote-info {
@@ -495,4 +1012,318 @@ box-shadow: 0, 12px, 12px rgba(0,0,0,0.25);
 .lyrics-button {
   border-radius: 8px;
   height: 45px;
+}
+
+/* =========================
+   OVERLAY CLIP
+   ========================= */
+
+.clip-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.clip-overlay.hidden {
+  display: none;
+}
+
+.clip-container {
+  position: relative;
+  width: 85vw;
+  max-width: 900px;
+  height: 80vh;
+  background: #000;
+  border: 2px solid #d8a415;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,0,0,0.9);
+
+  animation: fadeUp 0.35s ease;
+}
+
+.clip-container.fade-out {
+  animation: fadeDown 0.3s ease forwards;
+}
+
+.clip-overlay.fade-out {
+  opacity: 0;
+}
+
+#clipVideo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: black;
+}
+
+/* animación tipo card */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+}
+
+.clip-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: rgba(0,0,0,0.6);
+  color: #d8a415;
+  border: 1px solid #d8a415;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.clip-close:hover {
+  background: #d8a415;
+  color: #222;
+  transform: scale(1.1);
+}
+
+.volume-slider {
+  display: block !important;
+  width: 160px;
+  height: 6px;
+  accent-color: #d8a415;
+}
+
+
+#globalVolume {
+  width: 180px;
+  height: 6px;
+  appearance: none;
+  background: rgba(216,164,21,0.35);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+#globalVolume::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #d8a415;
+}
+
+#globalVolume::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #d8a415;
+}
+
+/* Grid de canciones */
+.songs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+
+/* Wrapper para centrar la barra */
+.global-volume-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* Caja de volumen */
+
+.global-volume {
+  background: #333;
+  border: 2px solid #d8a415;
+  border-radius: 16px;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.voter-card {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #2f2f2f;
+  border: 2px solid #d6a317;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(214, 163, 23, 0.15);
+}
+
+.voter-title {
+  color: #f5c542;
+  margin-bottom: 30px;
+}
+
+/* ===== INPUT ===== */
+#nameStep {
+  display: flex;
+  flex-direction: column;   /* 🔴 CLAVE */
+  align-items: center;      /* centra horizontal */
+  justify-content: center;  /* centra vertical */
+  min-height: 70vh;
+  text-align: center;
+}
+
+#nameStep h2 {
+  margin-bottom: 20px;
+  color: #f5c542;
+}
+
+.name-card {
+  max-width: 90%;
+  width: 420px;
+  padding: 30px;
+  border: 2px solid #f5c542;
+  border-radius: 20px;
+  background: #2f2f2f;
+  box-sizing: border-box;
+}
+
+
+.input-group {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin: 20px auto;
+}
+
+.input-group input {
+  width: 100%;
+  box-sizing: border-box;   
+  padding: 14px 44px;
+  border-radius: 12px;
+  border: 2px solid #f5c542;
+  background: transparent;
+  color: #fff;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #f5c542;
+}
+
+/* icono */
+.input-group .input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* label flotante */
+.input-group label {
+  position: absolute;
+  left: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.25s ease;
+  background: #2f2f2f;
+  padding: 0 6px;
+}
+
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+  top: -10px;
+  font-size: 12px;
+  color: #f5c542;
+}
+
+
+
+/* ===== BOTÓN ===== */
+.start-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background: #f5c542;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.start-btn.enabled {
+  opacity: 1;
+}
+
+.start-btn:hover.enabled {
+  transform: scale(1.03);
+}
+
+
+/*-----------RESPONSIVE---------- */
+
+@media (max-width: 600px) {
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+
+  #auth input {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 600px) {
+  footer {
+    margin-top: 40px;
+  }
+
+  .footer-button {
+    width: 100%;
+    max-width: 300px;
+  }
 }

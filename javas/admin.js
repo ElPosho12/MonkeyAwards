@@ -117,6 +117,20 @@ const ordenCategorias = [
   "MONO DEL AÑO"
 ];
 
+const labelMap = {
+  "FOTO DEL AÑO": {
+    "fotos/monnnkey.jpg": "Paisa",
+    "fotos/juan.jpg": "Juan",
+    "fotos/pedro.jpg": "Pedro",
+    "": "",
+    "": ""
+  },
+  "FAIL DEL AÑO": {
+    "fails/caida1.mp4": "La caída épica",
+    "fails/caida2.mp4": "El resbalón"
+  }
+};
+
 async function loadResults() {
   const track = document.getElementById("carouselTrack");
   const dotsContainer = document.getElementById("carouselDots");
@@ -169,36 +183,42 @@ async function loadResults() {
       } else {
         keys.forEach(cat => {
           const li = document.createElement("li");
-          const value = Array.isArray(votos[cat]) ? votos[cat].join(", ") : votos[cat];
+          let value = votos[cat];
+          // Si hay un mapa de labels para esta categoría
+          if (labelMap[cat]) {
+            if (Array.isArray(value)) {
+              value = value.map(v => labelMap[cat][v] || v).join(", ");
+            } else {
+              value = labelMap[cat][value] || value;
+            }
+          }
           li.innerHTML = `<strong>${cat}:</strong> ${value}`;
           list.appendChild(li);
         });
+
       }
 
-      box.appendChild(list);
-      slide.appendChild(box);
-      track.appendChild(slide);
+    box.appendChild(list);
+    slide.appendChild(box);
+    track.appendChild(slide);
 
-      slides.push(slide);
-
-      const dot = document.createElement("span");
-      dot.className = idx === 0 ? "active" : "";
-      dot.dataset.index = idx;
-      dotsContainer.appendChild(dot);
-
-      idx++;
+    slides.push(slide);
+    const dot = document.createElement("span");
+    dot.className = idx === 0 ? "active" : "";
+    dot.dataset.index = idx;
+    dotsContainer.appendChild(dot);
+    idx++;
     });
+  let current = 0;
 
-    let current = 0;
+  function updateCarousel() {
+    if (!slides.length) return;
+    track.style.transform = `translateX(-${current * 100}%)`;
 
-    function updateCarousel() {
-      if (!slides.length) return;
-      track.style.transform = `translateX(-${current * 100}%)`;
-
-      const allDots = dotsContainer.querySelectorAll("span");
-      allDots.forEach(d => d.classList.remove("active"));
-      dotsContainer.querySelector(`span[data-index="${current}"]`)?.classList.add("active");
-    }
+    const allDots = dotsContainer.querySelectorAll("span");
+    allDots.forEach(d => d.classList.remove("active"));
+    dotsContainer.querySelector(`span[data-index="${current}"]`)?.classList.add("active");
+  }
 
     // ======================
     // EVENTOS DE BOTONES

@@ -25,11 +25,11 @@ try {
 const categories = [
   { name: "JUNTADA DEL AÑO", options: ["A","B","C","D","E"] },
   { name: "CLIP DEL AÑO", options: [
-      { text: "Clip 1", link: "https://medal.tv/clip-example1" },
-      { text: "Clip 2", link: "https://medal.tv/clip-example2" },
-      { text: "Clip 3", link: "https://medal.tv/clip-example3" },
-      { text: "Clip 4", link: "https://medal.tv/clip-example4" },
-      { text: "Clip 5", link: "https://medal.tv/clip-example5" }
+      { text: "Clip 1", video: "/clips/clip_1.mp4" },
+      { text: "Clip 2", video: "" },
+      { text: "Clip 3", video: "" },
+      { text: "Clip 4", video: "" },
+      { text: "Clip 5", video: "" }
     ] 
   },
   { name: "FOTO DEL AÑO", options: ["fotos/monnnkey.jpg","fotos/ejemplo2.jpg","fotos/ejemplo2.jpg","fotos/ejemplo2.jpg","fotos/ejemplo2.jpg"]},
@@ -69,16 +69,52 @@ const clickSound = new Audio("sonidos/footer.mp3");
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("categoryContainer");
   const nextBtn = document.getElementById("nextBtn");
-  const startBtn = document.getElementById("startBtn");
   const nameStep = document.getElementById("nameStep");
   const votingStep = document.getElementById("votingStep");
   const footerBtn = document.getElementById("footerBtn");
   const footerSound = document.getElementById("footer-sound");
-
   const lyricsModal = document.getElementById("lyricsModal");
   const lyricsTitle = document.getElementById("lyricsTitle");
   const lyricsText = document.getElementById("lyricsText");
   const closeLyrics = document.getElementById("closeLyrics");
+  const clipOverlay = document.getElementById("clipOverlay");
+  const clipVideo = document.getElementById("clipVideo");
+  const closeClip = document.getElementById("closeClip");
+  const voterInput = document.getElementById("userName");
+  const startBtn = document.getElementById("startBtn");
+
+voterInput.addEventListener("input", () => {
+  if (voterInput.value.trim().length >= 2) {
+    startBtn.disabled = false;
+    startBtn.classList.add("enabled");
+  } else {
+    startBtn.disabled = true;
+    startBtn.classList.remove("enabled");
+  }
+});
+
+  if (clipOverlay) {
+    clipOverlay.classList.add("hidden");
+    clipVideo.src = "";
+  }
+
+  closeClip.addEventListener("click", () => {
+  const container = clipOverlay.querySelector(".clip-container");
+
+  // animaciones de salida
+  container.classList.add("fade-out");
+  clipOverlay.classList.add("fade-out");
+
+  setTimeout(() => {
+    clipVideo.pause();
+    clipVideo.currentTime = 0;
+    clipVideo.src = "";
+
+    clipOverlay.classList.add("hidden");
+    clipOverlay.classList.remove("fade-out");
+    container.classList.remove("fade-out");
+  }, 300);
+});
 
   // --- NOTIFICACIONES ---
   function notify(message, type = "error") {
@@ -153,104 +189,56 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- MOSTRAR CATEGORÍA ---
-  function showCategory(){
-    const c=categories[index];
-    const max=singleVoteCategories.includes(c.name)?1:2;
+  function showCategory() {
+  const c = categories[index];
+  const max = singleVoteCategories.includes(c.name) ? 1 : 2;
 
-    container.innerHTML=`
-      <div class="category">
-        <h2>${c.name}</h2>
-        <p class="category-subtitle">Puedes elegir <b>${max}</b> opción(es).</p>
-        <div class="options-grid"></div>
-      </div>
-    `;
-    const grid=container.querySelector(".options-grid");
+  // ============================
+  // CONTENEDOR BASE
+  // ============================
+  container.innerHTML = `
+    <div class="category">
+      <h2>${c.name}</h2>
+      <p class="category-subtitle">
+        Puedes elegir <b>${max}</b> opción(es).
+      </p>
+      <div class="options-grid"></div>
+    </div>
+  `;
 
-    // CANCION DEL AÑO
-    if(c.name==="CANCION DEL AÑO"){
-      grid.innerHTML=c.options.map(opt=>`
-        <div class="card-option card-clip" data-value="${opt.text}">
-          <div class="clip-title">${opt.text}</div>
-          <audio src="${opt.audio}" preload="none"></audio>
-          <div class="song-buttons">
-            <button class="play-btn">▶️</button>
-            <button class="lyrics-button" data-letra="${opt.letra.replace(/\n/g,"\\n")}">Letra</button>
-          </div>
-        </div>
-      `).join("");
+  const grid = container.querySelector(".options-grid");
 
-      const playButtons=grid.querySelectorAll(".play-btn");
-      addButtonSounds([...playButtons]); // solo play-btn
-
-      playButtons.forEach(btn=>{
-        btn.addEventListener("click",(e)=>{
-          e.stopPropagation();
-          const card=btn.closest(".card-option");
-          const audio=card.querySelector("audio");
-
-          // detiene otros audios
-          playButtons.forEach(b=>{
-            const a=b.closest(".card-option").querySelector("audio");
-            if(a!==audio){ a.pause(); b.classList.remove("active-btn"); b.textContent="▶️"; }
-          });
-
-          if(audio.paused){ audio.play(); btn.classList.add("active-btn"); btn.textContent="⏸️"; }
-          else{ audio.pause(); btn.classList.remove("active-btn"); btn.textContent="▶️"; }
-
-          audio.onended=()=>{ btn.classList.remove("active-btn"); btn.textContent="▶️"; };
-        });
-      });
-
-      // LETRA (sin sonido)
-      const lyricsButtons=grid.querySelectorAll(".lyrics-button");
-      lyricsButtons.forEach(btn=>{
-        btn.addEventListener("click",(e)=>{
-          e.stopPropagation();
-          const optionName=btn.closest(".card-option").dataset.value;
-          const letra=btn.dataset.letra.replace(/\\n/g,"\n");
-          lyricsTitle.textContent=optionName;
-          lyricsText.textContent=letra;
-          lyricsModal.classList.add("final-visible");
-          lyricsModal.classList.remove("final-hidden");
-        });
-      });
-    }
-    // CLIP DEL AÑO
-    else if(typeof c.options[0]==="object" && c.options[0].link){
-      grid.innerHTML=c.options.map(opt=>`
-        <div class="card-option card-clip" data-value="${opt.text}">
-          <div class="clip-title">${opt.text}</div>
-          <button class="clip-button" data-link="${opt.link}">Ver clip</button>
-        </div>
-      `).join("");
-
-      const clipButtons=grid.querySelectorAll(".clip-button");
-      addButtonSounds(clipButtons);
-      clipButtons.forEach(btn=>{
-        btn.addEventListener("click",(e)=>{
-          e.stopPropagation();
-          window.open(btn.dataset.link,"_blank");
-        });
-      });
-    }
-    // OTRAS CATEGORÍAS
-    else{
-      grid.innerHTML=c.options.map(opt=>`
-        <div class="card-option" data-value="${opt}">
-          ${opt.match(/\.(jpg|png|jpeg|gif)$/i)? `<img src="${opt}" class="option-img">`:`<span>${opt}</span>`}
-        </div>
-      `).join("");
-    }
-
-    // SELECCIÓN CARD
-    const selectSound=document.getElementById("select-sound");
-    document.querySelectorAll(".card-option").forEach(card=>{
-      card.addEventListener("click",()=>{
-        if(selectSound){ selectSound.currentTime=0; selectSound.play().catch(()=>{});}
-        toggleCard(card);
-      });
-    });
+  /* =====================================================
+     🎵 CANCIÓN DEL AÑO
+  ===================================================== */
+  if (c.name === "CANCION DEL AÑO") {
+    renderSongCategory(grid, c);
   }
+
+  /* =====================================================
+     🎬 CLIP DEL AÑO
+  ===================================================== */
+  else if (c.name === "CLIP DEL AÑO") {
+    renderClipCategory(grid, c);
+  }
+
+  /* =====================================================
+     📦 OTRAS CATEGORÍAS
+  ===================================================== */
+  else {
+    renderDefaultCategory(grid, c);
+  }
+
+  /* =====================================================
+     📖 LETRAS
+  ===================================================== */
+  bindLyricsButtons(grid);
+
+  /* =====================================================
+     ✅ SELECCIÓN DE CARDS
+  ===================================================== */
+  bindCardSelection(grid);
+}
 
   // --- TOGGLE CARD ---
   function toggleCard(card){
@@ -273,6 +261,220 @@ document.addEventListener("DOMContentLoaded", () => {
     if(selectedCards.length>=max){ notify(`Solo puedes seleccionar ${max} opción(es)`); return; }
     card.classList.add("selected");
   }
+
+function renderSongCategory(grid, category) {
+  grid.innerHTML = `
+    <div class="songs-grid">
+      ${category.options.map(opt => `
+        <div class="card-option card-clip" data-value="${opt.text}">
+          <div class="clip-title">${opt.text}</div>
+
+          <audio src="${opt.audio}" preload="none"></audio>
+
+          <div class="song-buttons">
+            <button class="play-btn">▶️</button>
+            <button
+              class="lyrics-button"
+              data-letra="${(opt.letra ?? "").replace(/\n/g, "\\n")}">
+              Letra
+            </button>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+
+    <div class="global-volume-wrapper">
+      <div class="global-volume">
+        <label>🔊 Volumen</label>
+        <input
+          id="globalVolume"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0.7">
+      </div>
+    </div>
+  `;
+
+  const playButtons = grid.querySelectorAll(".play-btn");
+  const audios = grid.querySelectorAll("audio");
+  const globalVolume = grid.querySelector("#globalVolume");
+
+  addButtonSounds(playButtons);
+
+  // ▶️ Play / Pause exclusivo
+  playButtons.forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      const card = btn.closest(".card-option");
+      const audio = card.querySelector("audio");
+
+      playButtons.forEach(b => {
+        const a = b.closest(".card-option").querySelector("audio");
+        if (a !== audio) {
+          a.pause();
+          b.textContent = "▶️";
+          b.classList.remove("active-btn");
+        }
+      });
+
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = "⏸️";
+        btn.classList.add("active-btn");
+      } else {
+        audio.pause();
+        btn.textContent = "▶️";
+        btn.classList.remove("active-btn");
+      }
+
+      audio.onended = () => {
+        btn.textContent = "▶️";
+        btn.classList.remove("active-btn");
+      };
+    });
+  });
+
+  // 🔊 Volumen global
+  if (globalVolume) {
+    audios.forEach(a => (a.volume = globalVolume.value));
+
+    globalVolume.addEventListener("input", e => {
+      audios.forEach(a => (a.volume = e.target.value));
+    });
+
+    globalVolume.addEventListener("click", e => e.stopPropagation());
+  }
+}
+
+
+function setupSongAudio(grid) {
+  const playButtons = grid.querySelectorAll(".play-btn");
+  const audios = grid.querySelectorAll("audio");
+  const globalVolume = document.getElementById("globalVolume");
+
+  addButtonSounds([...playButtons]);
+
+  // volumen inicial
+  if (globalVolume) {
+    audios.forEach(a => a.volume = globalVolume.value);
+
+    globalVolume.addEventListener("input", e => {
+      audios.forEach(a => (a.volume = e.target.value));
+    });
+
+    globalVolume.addEventListener("click", e => e.stopPropagation());
+  }
+
+  // ▶️ play / pausa
+  playButtons.forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      const card = btn.closest(".card-option");
+      const audio = card.querySelector("audio");
+
+      playButtons.forEach(b => {
+        const a = b.closest(".card-option").querySelector("audio");
+        if (a !== audio) {
+          a.pause();
+          b.textContent = "▶️";
+          b.classList.remove("active-btn");
+        }
+      });
+
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = "⏸️";
+        btn.classList.add("active-btn");
+      } else {
+        audio.pause();
+        btn.textContent = "▶️";
+        btn.classList.remove("active-btn");
+      }
+
+      audio.onended = () => {
+        btn.textContent = "▶️";
+        btn.classList.remove("active-btn");
+      };
+    });
+  });
+}
+
+function renderClipCategory(grid, category) {
+  grid.innerHTML = category.options.map(opt => `
+    <div class="card-option card-clip" data-value="${opt.text}">
+      <div class="clip-title">${opt.text}</div>
+      <button class="clip-button" data-video="${opt.video}">
+        Ver clip
+      </button>
+    </div>
+  `).join("");
+
+  const clipButtons = grid.querySelectorAll(".clip-button");
+  addButtonSounds(clipButtons);
+
+  clipButtons.forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      clipVideo.src = btn.dataset.video;
+      clipVideo.currentTime = 0;
+
+      clipOverlay.classList.remove("hidden");
+      clipOverlay.classList.add("final-visible");
+
+      clipVideo.play();
+    });
+  });
+}
+
+
+function renderDefaultCategory(grid, category) {
+  grid.innerHTML = category.options.map(opt => `
+    <div class="card-option" data-value="${opt}">
+      ${opt.match(/\.(jpg|png|jpeg|gif)$/i)
+        ? `<img src="${opt}" class="option-img">`
+        : `<span>${opt}</span>`}
+    </div>
+  `).join("");
+}
+
+function bindLyricsButtons(grid) {
+  grid.querySelectorAll(".lyrics-button").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      lyricsTitle.textContent =
+        btn.closest(".card-option").dataset.value;
+
+      lyricsText.textContent =
+        btn.dataset.letra.replace(/\\n/g, "\n");
+
+      lyricsModal.classList.remove("final-hidden");
+      lyricsModal.classList.add("final-visible");
+    });
+  });
+}
+
+
+function bindCardSelection(grid) {
+  const selectSound = document.getElementById("select-sound");
+
+  grid.querySelectorAll(".card-option").forEach(card => {
+    card.addEventListener("click", () => {
+      if (selectSound) {
+        selectSound.currentTime = 0;
+        selectSound.play().catch(() => {});
+      }
+      toggleCard(card);
+    });
+  });
+}
+
+
 
   // --- SIGUIENTE ---
   const nextSound=document.getElementById("next-category-sound");
@@ -342,3 +544,4 @@ if (footerBtn) {
     if(e.target===lyricsModal){ lyricsModal.classList.add("final-hidden"); lyricsModal.classList.remove("final-visible"); }
   });
 });
+

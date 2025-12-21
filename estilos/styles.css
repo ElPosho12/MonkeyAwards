@@ -24,8 +24,6 @@ header p {
 }
 
 main {
-  max-width: 980px;
-  margin: 40px auto;
   padding: 0 20px;
 }
 
@@ -176,6 +174,17 @@ footer {
   color: #ffd85e;
 }
 
+.voter-box ul {
+  text-align: left;
+  padding-left: 0;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.voter-box li {
+  text-align: left;
+}
+
 /* ============================================
    CARRUSEL ADMIN
    ============================================ */
@@ -289,4 +298,308 @@ footer {
   border: solid #c4a03d;
   background-color: #eecb4a;
   box-shadow: 0 12px 12px rgba(0,0,0,0.25);
+}
+
+.clip-video {
+  width: 100%;
+  max-height: 260px;
+  border-radius: 14px;
+  background: #000;
+}
+
+.clip-video-wrapper {
+  margin-top: 12px;
+}
+
+/* Fondo oscuro */
+.clip-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* oculto */
+.clip-overlay.hidden {
+  display: none;
+}
+
+/* contenedor del video */
+.clip-container {
+  position: relative;
+  width: 80vw;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+}
+
+/* video */
+#clipVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* botón cerrar */
+.clip-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: #111;
+  color: #d8a415;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 5;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+}
+
+/* animación cine */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.35s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-slide {
+  justify-content: stretch;
+}
+
+.voter-box {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ================================
+            RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .carousel-btn {
+    padding: 8px;
+    font-size: 18px;
+  }
+
+  .carousel-btn.left {
+    left: 4px;
+  }
+
+  .carousel-btn.right {
+    right: 4px;
+  }
+
+  .carousel-slide {
+    padding: 0 6px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .voter-box {
+    padding: 12px;
+  }
+
+  .voter-box h3 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .voter-box ul {
+    padding-left: 0;
+  }
+
+  .voter-box li {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 600px) {
+  footer {
+    margin-top: 40px;
+  }
+
+  .footer-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  main {
+    max-width: none;
+    margin: 0;
+    padding: 20px;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide-container {
+    width: 100%;
+  }
+
+  #auth.card {
+    width: 100%;
+    max-width: 420px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+  body:not(.admin-logged) footer {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+
+  /* contenedor general */
+  main {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  /* carrusel ocupa más */
+  .carousel-wrapper {
+    margin: 16px auto;
+  }
+
+  .carousel-window {
+    border-radius: 10px;
+  }
+
+  .carousel-slide {
+    padding: 0;
+  }
+
+  /* caja del votante */
+  .voter-box {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .voter-box h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .voter-box ul {
+    padding-left: 0;
+  }
+
+  .voter-box li {
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 10px;
+  }
+
+  /* botones carrusel */
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    padding: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .carousel-btn.left {
+    left: 6px;
+  }
+
+  .carousel-btn.right {
+    right: 6px;
+  }
+
+  /* dots más visibles */
+  .carousel-dots span {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* botón volver */
+  .footer-button {
+    width: 100%;
+    max-width: none;
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .voter-box {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 600px) {
+
+  /* romper el layout desktop */
+  main {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+  }
+
+  header {
+    padding: 20px 12px;
+  }
+
+  .carousel-wrapper {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .carousel-window {
+    width: 100%;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  main {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 12px;
+  }
+
+  .carousel-wrapper,
+  .carousel-window,
+  .carousel-track {
+    width: 100%;
+  }
+
 }

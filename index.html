@@ -2,17 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Votación - Monkey Awards</title>
   <link rel="stylesheet" href="estilos/style.css">
   <link rel="icon" type="image/png" href="fotos/file.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
 </head>
 
 <body>
@@ -27,16 +25,28 @@
 
   <main>
     <!-- PASO 1: INGRESO DE NOMBRE -->
-    <div id="nameStep">
-      <h2>Ingresa tu nombre</h2>
-      <input type="text" id="userName" placeholder="Tu nombre..." />
-      <button id="startBtn">Comenzar</button>
+<div id="nameStep">
+  <h2>Ingresa tu nombre</h2>
+
+  <div class="name-card">
+    <div class="input-group">
+      <span class="input-icon">👤</span>
+      <input type="text" id="userName" placeholder=" " required />
+      <label for="userName">Acá nene</label>
     </div>
+
+    <button id="startBtn" disabled>Comenzar</button>
+  </div>
+</div>
+
+
+
 
     <!-- PASO 2: VOTACIÓN -->
     <div id="votingStep" style="display:none;">
       <div id="categoryContainer"></div>
       <button id="nextBtn">Siguiente</button>
+      
     </div>
 
     <!-- PANTALLA FINAL -->
@@ -48,18 +58,26 @@
             <path class="check-path" d="M14 27 L22 35 L38 19"/>
           </svg>
         </div>
-        <h2 class="final-title">¡Gracias por votar!</h2>
+        <h2 class="final-title">gracias capoo</h2>
       </div>
     </div>
 
+    
+
     <div id="lyricsModal" class="lyrics-modal final-hidden">
-  <div class="lyrics-content">
-    <button id="closeLyrics" class="close-lyrics">✖</button>
-    <h3 id="lyricsTitle">Título de la canción</h3>
-    <pre id="lyricsText">Aquí aparecerá la letra...</pre>
+    <div class="lyrics-content">
+      <button id="closeLyrics" class="close-lyrics">✖</button>
+      <h3 id="lyricsTitle">Título de la canción</h3>
+      <pre id="lyricsText">Aquí aparecerá la letra...</pre>
+    </div>
+  </div>
+
+<div id="clipOverlay" class="clip-overlay hidden">
+  <div class="clip-container">
+    <button id="closeClip" class="clip-close">✖</button>
+    <video id="clipVideo" controls></video>
   </div>
 </div>
-
 
 
     <!-- AUDIOS -->
