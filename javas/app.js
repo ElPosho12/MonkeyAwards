@@ -24,20 +24,20 @@ try {
 // --- CATEGORÍAS ---
 const categories = [
   { name: "JUNTADA DEL AÑO", options: [
-    {text: "Cumple de agus", foto:"/fotos/Juntadas/juntada1.jpeg"},
+    {text: "Cumple de agus", foto:"fotos/Juntadas/juntada1.jpeg"},
     {text:"casa de bruno (escondidas turbias)", foto:"fotos/Juntadas/juntada2.jpeg"},
     {text:"casa de fafa (caipirinha)", foto:"fotos/Juntadas/juntada3.jfif"}, 
-    {text:"Monkey Awards 2024(posho)", foto:"/fotos/Juntadas/juntada4.jfif"}
+    {text:"Monkey Awards 2024(posho)", foto:"fotos/Juntadas/juntada4.jfif"}
     
   
   ] 
   },
   { name: "CLIP DEL AÑO", options: [
-      { text: "Soy yo, soy yo (juani)", video: "/clips/clip1.mp4" },
-      { text: "no chau, cague (bruno)", video: "/clips/clip2.mp4" },
-      { text: "thunderbolt (fafa)", video: "/clips/clip3.mp4" },
-      { text: "monardo (maxi)", video: "/clips/clip4.mp4" },
-      { text: "un triciclo (agus)", video: "/clips/clip5.mp4" }
+      { text: "Soy yo, soy yo (juani)", video: "clips/clip1.mp4" },
+      { text: "no chau, cague (bruno)", video: "clips/clip2.mp4" },
+      { text: "thunderbolt (fafa)", video: "clips/clip3.mp4" },
+      { text: "monardo (maxi)", video: "clips/clip4.mp4" },
+      { text: "un triciclo (agus)", video: "clips/clip5.mp4" }
     ] 
   },
   {   name: "FOTO DEL AÑO",
@@ -50,16 +50,16 @@ const categories = [
   ]
   },
   { name: "FAIL DEL AÑO", options: [
-    { text: "fafa se olvida la entrada(fafa)", foto: "/fotos/Fail/fail1.jpeg" },
-    { text: "caida de jarra en cumple de agus (bruno)", foto: "/fotos/Fail/fail2.jfif" },
-    { text: "corte de pelo al posho (agus)", foto: "/fotos/Fail/fail3." },
-    { text: "juani errando la tortilla(juani)", foto: "/fotos/Fail/fail4.jpeg" },
-    { text: "pegarle las hojas a fafa(maxi)", foto: "/fotos/Fail/fail5.jpeg" },
+    { text: "fafa se olvida la entrada(fafa)", foto: "fotos/Fail/fail1.jpeg" },
+    { text: "caida de jarra en cumple de agus (bruno)", foto: "fotos/Fail/fail2.jfif" },
+    { text: "corte de pelo al posho (agus)", foto: "fotos/Fail/fail3." },
+    { text: "juani errando la tortilla(juani)", foto: "fotos/Fail/fail4.jpeg" },
+    { text: "pegarle las hojas a fafa(maxi)", foto: "fotos/Fail/fail5.jpeg" },
   ] 
   },
   { name: "MONADA DEL AÑO", options: [
     { text: "Nafta a maxi (fafa)", foto: "fotos/Monadas/monada1.jfif" },
-    { text: "espalda escrita de fafa (juani)", foto: "/fotos/Monadas/monada2.jfif" },
+    { text: "espalda escrita de fafa (juani)", foto: "fotos/Monadas/monada2.jfif" },
     { text: "fafa con remera rota en AUD (bruno)", foto: "fotos/Monadas/monada3.jfif" },
     { text: "cascotes en mochila (posho)", foto: "fotos/Monadas/monada4.jpeg" },
     { text: "Alfajor en la remera de fafa(paisa)", foto: "fotos/Monadas/monada5.jfif" }
@@ -72,46 +72,46 @@ const categories = [
     ]
   },
   { name: "MEJOR MONO EN LA ESCUELA", options:[
-    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
-    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
-    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
-    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
-    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
-    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
-    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+    { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "fotos/monos/juani.jfif" }
   
   ] 
   },
   { name: "MEJOR MONO FUERA DEL COLE", options:[
-    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
-    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
-    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
-    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
-    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
-    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
-    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+    { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "fotos/monos/juani.jfif" }
   ] },
   { name: "MONITO DEL AÑO", options:[
-    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
-    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
-    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
-    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
-    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
-    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
-    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+    { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "fotos/monos/juani.jfif" }
   ] },
   { name: "MONO DEL AÑO", options:[
-    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
-    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
-    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
-    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
-    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
-    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
-    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+    { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "fotos/monos/juani.jfif" }
   ] }
 ];
 
