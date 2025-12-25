@@ -41,7 +41,7 @@ const authDiv = document.getElementById("auth");
 const resultsDiv = document.getElementById("results");
 
 // ===============================
-//  SONIDOS DEL CARRUSEL
+//  SONIDOS DEL CARRUSEL Y LOGIN
 // ===============================
 const hoverSound = document.getElementById("carousel-hover-sound");
 const slideSound = document.getElementById("carousel-move-sound");
@@ -49,34 +49,113 @@ const slideSound = document.getElementById("carousel-move-sound");
 hoverSound.volume = 0.4;
 slideSound.volume = 0.4;
 
+function notifyAdmin(message, type = "error") {
+  const box = document.getElementById("notifyBox");
+  const errorSound = document.getElementById("notify-error-sound");
+  const successSound = document.getElementById("notify-success-sound");
+
+  if (!box) return;
+
+  box.className = "notify-box";
+  box.textContent = message;
+  box.classList.add(type === "success" ? "notify-success" : "notify-error");
+
+  box.classList.add("show");
+
+  if (type === "success" && successSound) {
+    successSound.currentTime = 0;
+    successSound.play().catch(() => {});
+  }
+
+  if (type === "error" && errorSound) {
+    errorSound.currentTime = 0;
+    errorSound.play().catch(() => {});
+  }
+
+  setTimeout(() => {
+    box.classList.remove("show");
+  }, 2200);
+}
+
+
 // ===============================
 //  LOGIN
 // ===============================
 if (loginBtn) {
   loginBtn.addEventListener("click", async () => {
-    authMsg.textContent = "";
+    // evitar doble click
+    if (loginBtn.disabled) return;
+
+    const originalText = loginBtn.textContent;
+    loginBtn.textContent = "Ingresando...";
+    loginBtn.disabled = true;
+    loginBtn.classList.add("loading");
+
+    notifyAdmin("ojo...?", "success");
+
     try {
-      await signInWithEmailAndPassword(auth, emailEl.value, passEl.value);
-    } catch (err) {
+      await signInWithEmailAndPassword(
+        auth,
+        emailEl.value,
+        passEl.value
+      );
+      // 👉 si entra bien, NO reactivamos
+      // porque Firebase va a disparar onAuthStateChanged
+    } 
+    catch (err){
       console.error("Login error:", err);
-      authMsg.textContent = "Error en inicio de sesión: " + (err.message || err);
+
+      // 🔔 notificación roja (ya la tenés)
+      notifyAdmin("Tas equivocado flaquito", "error");
+
+      // 🔁 reset botón
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Ingresar";
+      loginBtn.classList.remove("loading");
+
+       // ❌ glow rojo
+      loginBtn.classList.remove("glow-error"); // reset por si estaba
+      void loginBtn.offsetWidth; // fuerza reflow
+      loginBtn.classList.add("glow-error");
     }
   });
 }
-
 // ===============================
 //  LOGOUT
 // ===============================
 if (logoutBtn) {
   logoutBtn.addEventListener("click", () => {
+    // animación de salida de resultados
     resultsDiv.classList.remove("slide-center");
     resultsDiv.classList.add("slide-right");
 
+    // mostrar login
     authDiv.classList.remove("hidden", "slide-left");
-    setTimeout(() => authDiv.classList.add("slide-center"), 10);
+
+    setTimeout(() => {
+      authDiv.classList.add("slide-center");
+
+      // 🔁 reset botón login
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Ingresar";
+      loginBtn.classList.remove("loading");
+
+      // ✨ glow suave post-slide
+      loginBtn.classList.add("glow-once");
+      setTimeout(() => {
+        loginBtn.classList.remove("glow-once");
+      }, 900);
+
+    }, 650); // ⏱️ después del slide
+
+    // limpiar inputs
+    emailEl.value = "";
+    passEl.value = "";
+    authMsg.textContent = "";
 
     signOut(auth);
   });
+
 }
 
 // ===============================
@@ -278,6 +357,61 @@ async function loadResults() {
     });
 
     updateCarousel();
+
+    // ======================
+// SWIPE MOBILE
+// ======================
+const carouselWindow = document.querySelector(".carousel-window");
+
+// ======================
+// TOUCH + INERCIA iOS
+// ======================
+let startX = 0;
+let currentX = 0;
+let dragging = false;
+let deltaX = 0;
+
+track.addEventListener("touchstart", (e) => {
+  if (e.touches.length !== 1) return;
+
+  startX = e.touches[0].clientX;
+  dragging = true;
+  deltaX = 0;
+
+  track.style.transition = "none";
+}, { passive: true });
+
+track.addEventListener("touchmove", (e) => {
+  if (!dragging) return;
+
+  currentX = e.touches[0].clientX;
+  deltaX = currentX - startX;
+
+  const percent = (deltaX / track.offsetWidth) * 100;
+  track.style.transform = `translateX(calc(-${current * 100}% + ${percent}%))`;
+}, { passive: true });
+
+track.addEventListener("touchend", () => {
+  if (!dragging) return;
+  dragging = false;
+
+  track.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
+
+  const threshold = track.offsetWidth * 0.18;
+
+  if (deltaX > threshold && current > 0) {
+    slideSound.currentTime = 0;
+    slideSound.play();
+    current--;
+  } else if (deltaX < -threshold && current < slides.length - 1) {
+    slideSound.currentTime = 0;
+    slideSound.play();
+    current++;
+  }
+
+  updateCarousel();
+});
+
 
   } catch (err) {
     console.error("Error cargando votos:", err);

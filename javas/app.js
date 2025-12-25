@@ -23,30 +23,96 @@ try {
 
 // --- CATEGORÍAS ---
 const categories = [
-  { name: "JUNTADA DEL AÑO", options: ["A","B","C","D","E"] },
+  { name: "JUNTADA DEL AÑO", options: [
+    {text: "Cumple de agus", foto:"/fotos/Juntadas/juntada1.jpeg"},
+    {text:"casa de bruno (escondidas turbias)", foto:"fotos/Juntadas/juntada2.jpeg"},
+    {text:"casa de fafa (caipirinha)", foto:"fotos/Juntadas/juntada3.jfif"}, 
+    {text:"Monkey Awards 2024(posho)", foto:"/fotos/Juntadas/juntada4.jfif"}
+    
+  
+  ] 
+  },
   { name: "CLIP DEL AÑO", options: [
-      { text: "Clip 1", video: "/clips/clip_1.mp4" },
-      { text: "Clip 2", video: "" },
-      { text: "Clip 3", video: "" },
-      { text: "Clip 4", video: "" },
-      { text: "Clip 5", video: "" }
+      { text: "Soy yo, soy yo (juani)", video: "/clips/clip1.mp4" },
+      { text: "no chau, cague (bruno)", video: "/clips/clip2.mp4" },
+      { text: "thunderbolt (fafa)", video: "/clips/clip3.mp4" },
+      { text: "monardo (maxi)", video: "/clips/clip4.mp4" },
+      { text: "un triciclo (agus)", video: "/clips/clip5.mp4" }
     ] 
   },
-  { name: "FOTO DEL AÑO", options: ["fotos/monnnkey.jpg","fotos/ejemplo2.jpg","fotos/ejemplo2.jpg","fotos/ejemplo2.jpg","fotos/ejemplo2.jpg"]},
-  { name: "FAIL DEL AÑO", options: ["A", "B", "C","D","E"] },
-  { name: "MONADA DEL AÑO", options: ["A", "B", "C","D","E"] },
+  {   name: "FOTO DEL AÑO",
+  options: [
+    { text: "Previa pinar (agus)", foto: "fotos/Fotos/foto1.jfif" },
+    { text: "fafa en el baño (bruno)", foto: "fotos/Fotos/foto2.jfif" },
+    { text: "iago aspas ahmud (fafa)", foto: "fotos/Fotos/foto3.jpeg" },
+    { text: "posho silenciado (posho)", foto: "fotos/Fotos/foto4.jpg" },
+    { text: "almorzando (paisa)", foto: "fotos/Fotos/foto5.jpeg" }
+  ]
+  },
+  { name: "FAIL DEL AÑO", options: [
+    { text: "fafa se olvida la entrada(fafa)", foto: "/fotos/Fail/fail1.jpeg" },
+    { text: "caida de jarra en cumple de agus (bruno)", foto: "/fotos/Fail/fail2.jfif" },
+    { text: "corte de pelo al posho (agus)", foto: "/fotos/Fail/fail3." },
+    { text: "juani errando la tortilla(juani)", foto: "/fotos/Fail/fail4.jpeg" },
+    { text: "pegarle las hojas a fafa(maxi)", foto: "/fotos/Fail/fail5.jpeg" },
+  ] 
+  },
+  { name: "MONADA DEL AÑO", options: [
+    { text: "Nafta a maxi (fafa)", foto: "fotos/Monadas/monada1.jfif" },
+    { text: "espalda escrita de fafa (juani)", foto: "/fotos/Monadas/monada2.jfif" },
+    { text: "fafa con remera rota en AUD (bruno)", foto: "fotos/Monadas/monada3.jfif" },
+    { text: "cascotes en mochila (posho)", foto: "fotos/Monadas/monada4.jpeg" },
+    { text: "Alfajor en la remera de fafa(paisa)", foto: "fotos/Monadas/monada5.jfif" }
+  ] 
+  },
   { name: "CANCION DEL AÑO", options: [
-      { text: "BIGOTE", audio: "canciones/BigoteDTR.mp3", letra: "Letra completa de la canción 1...\nVerso 1...\nCoro..." },
+      { text: "BIGOTE", audio: "canciones/BigoteDTR.mp3", letra: "Cantando en la calle Ercilla\nUn estudiante en Buenos Aires\nDescubrí que la vida\nEs un juego de azar, donde pierde el que gana\n\nPor equipaje una mochila\nUna carpeta y unas hojas del posho\nFue aquella tarde del jueves\nQue el bigote con jeanes, pelaba la verga\n\nLa complací con Rabo de Nube\nCorrespondió poniendo en el sombrero\nUna propina en australes\nCon la misma que al rato la invitaría un café\n\nLa hoja seguia en blanco\ncorrespondio mirandome feo\ncinco preguntas mortales\nlas mismas veces que el culo le entreguéeeee\n\ncomo olvidarme de marco\naquel bigote de la secundaria uuuoooooo eeeeeee\n\nsi me dejo un par de huellas\nen el culo y en la bija uuuoooooo\n\nComo olvidarme (...) de marcooooo\n\nMe fui de canchero en halagos\nMe fumigó con la mirada y me dijo\nPibe tendrás que cuidarte\nYo le dije: ¿De qué?\nEl me dijo: De mi\n\nUn taxi nos esperaba en la esquina\nSin preguntar me llevo a un sitio de strippers\nLe pregunté: ¿estás seguro?\nEl me dijo: Boludo aquí también laburooooooo\n\nEstuve en taller y en El aula\nmientras marco se relame el bigoteee\nToda belleza fue poca\nDespués de ver a bigote pelando la chotaaaaaaa\n\ncomo olvidarme de marco\naquel bigote de la secundaria uuuoooooo eeeeeee\n\nsi me dejo un par de huellas\nen el culo y en la bija uuuoooooo\n\nComo olvidarme (...) de marcooooo\n" },
       { text: "NAFTA", audio: "canciones/NAFTA.mp3", letra: "Entro al aula\n y siento un olor extrañoooo.\n ¿Que sera, que podra ser?\n abro lentamente mi mochila....\n\n !Quien fue!\n !Quien lo hizo!\n Mi mochila....\n tiene naftaaaaaaaaaa.\n\n !El olor, ... me esta matandoooo!\n voy a matar a alguien,\n quien tiro nafta en mi mochila\n mi cartuchera y mis utiles\n\n En el aula\n Se preguntan\n ¿Quien podra haber sido?\n los directores pasando\n !!!y yo cagado en las pataaaaas!!!\n\n Nafta en mi mochilaaaaaa\n fafa la concha de tu madre(NAFTA!)\n mis utiles estan podridos \n ahora de que mierda laburo.(NAFTA)\n\n\n Todos me hechan la culpa y yo no se que hacer\n me quiero tirar de un tercer piso\n para desapareceeeeeeer!!!!!\n\n !Ya me canseeee!\n ahora en mas no laburo\n mi año escolar termina aca\n fafa te voy a culear\n\n!Nafta nafta y nafta por todos lados!!\n\n fafa la concha de tu madre(NAFTA!) mis utiles estan podridos\n ahora de que mierda laburooooo.(NAFTA)\n\n Ahora... fafa lo voy a descuartizar!!\n aunque solo huela\n\n !NAFTAAAAAAAAAA!\n" },
       { text: "NARIGON", audio: "canciones/NARIGON.wav", letra: "Dicen que Fafa anda raro, que no es el mismo campeón,\n en el cole se lo ve mirando a Juani con pasión.\n Le dicen Fafín, Fafita, Bastián o El Father,\n pero cuando pasa Juani se pone rojo, se le cae el carácter.\n Papín camina lento, no pierde la dirección,\n con esa nariz gigante, todos dicen “¡narigón!”.\n Él sonríe, no lo niega, porque sabe que es razón,\n pero lo que guarda adentro es un secreto en explosión.\n\n En su pecho late fuerte, ya no quiere represión,\n no es mentira ni chiste, no es juego ni canción,\n sus ojos se fugan a Juani, sin pedirle perdón,\n porque a Fafa le gustan los hombres… lo grita su corazón.\n\n Narigón, narigón, Fafa quiere confesión,\n que no es fase ni capricho, es pura convicción.\n Narigón, narigón, ya no quiere más presión,\n se besó con un pibe en el boliche… y fue su liberación.\n\n Fue en el boliche esa noche, luces y respiración,\n entre risas con amigos, se cruzó una tentación.\n Ese chico lo miró, le tocó la mano, una conexión,\n y sin pensarlo demasiado, se comieron sin fricción.\n Se habló en todo el grupo, mil versiones, confusión,\n “Fafa está perdido”, dijeron… sin tener comprensión.\n Pero él sintió por dentro que era puro corazón,\n como cuando ve a Juani… la misma sensación.\n\n “¿Cómo digo que me gusta? ¿Cómo afronto la ocasión?”\n se pregunta Fafita, Bastián, Papín, El Father… el narigón.\n “¿Qué dirán mis colegas? ¿Qué dirá mi generación?”\n pero cuando Juani sonríe se le escapa la emoción.\n\n Narigón, narigón, Fafa quiere confesión,\n que no es fase ni capricho, es pura convicción.\n Narigón, narigón, ya no quiere más presión,\n se besó con un pibe en el boliche… y fue su liberación.\n\n Fafa mira al espejo y dice: “esta es mi verdad”,\n no importa el apodo, ni lo que digan detrás.\n Un narigón valiente, listo para declarar:\n le gustan los hombres… y a Juani lo quiere amar." },
-      { text: "Canción 4", audio: "canciones/cancion4.mp3", letra: "Letra completa de la canción 4...\nVerso 1...\nCoro..." },
-      { text: "Canción 5", audio: "canciones/cancion5.mp3", letra: "Letra completa de la canción 5...\nVerso 1...\nCoro..." }
     ]
   },
-  { name: "MEJOR MONO EN LA ESCUELA", options:["BRUNO","MAXI","AGUS","ABU","FAFA","POSHO","PAISA"] },
-  { name: "MEJOR MONO FUERA DEL COLE", options:["BRUNO","MAXI","AGUS","ABU","FAFA","POSHO","PAISA"] },
-  { name: "MONITO DEL AÑO", options:["BRUNO","MAXI","AGUS","ABU","FAFA","POSHO","PAISA"] },
-  { name: "MONO DEL AÑO", options:["BRUNO","MAXI","AGUS","ABU","FAFA","POSHO","PAISA"] }
+  { name: "MEJOR MONO EN LA ESCUELA", options:[
+    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+  
+  ] 
+  },
+  { name: "MEJOR MONO FUERA DEL COLE", options:[
+    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+  ] },
+  { name: "MONITO DEL AÑO", options:[
+    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+  ] },
+  { name: "MONO DEL AÑO", options:[
+    { text: "BRUNO", foto: "/fotos/monos/bruno.jpeg" },
+    { text: "MAXI", foto: "/fotos/monos/maxi.jpeg" },
+    { text: "AGUS", foto: "/fotos/monos/tito.jpeg" },
+    { text: "ABU", foto: "/fotos/monos/abuelo.jpeg" },
+    { text: "FAFA", foto: "/fotos/monos/fafa.jfif" },
+    { text: "POSHO", foto: "/fotos/monos/posho.jfif" },
+    { text: "PAISA", foto: "/fotos/monos/paisa.jfif" },
+    { text: "JUANI", foto: "/fotos/monos/juani.jfif" }
+  ] }
 ];
 
 let index = 0;
@@ -102,8 +168,8 @@ voterInput.addEventListener("input", () => {
   const container = clipOverlay.querySelector(".clip-container");
 
   // animaciones de salida
-  container.classList.add("fade-out");
-  clipOverlay.classList.add("fade-out");
+  container.classList.add("fade-out-up");
+  clipOverlay.classList.add("fade-out-up");
 
   setTimeout(() => {
     clipVideo.pause();
@@ -111,8 +177,8 @@ voterInput.addEventListener("input", () => {
     clipVideo.src = "";
 
     clipOverlay.classList.add("hidden");
-    clipOverlay.classList.remove("fade-out");
-    container.classList.remove("fade-out");
+    clipOverlay.classList.remove("fade-out-up");
+    container.classList.remove("fade-out-up");
   }, 300);
 });
 
@@ -130,21 +196,26 @@ voterInput.addEventListener("input", () => {
   }
 
   // --- ANIMACIÓN ENTRE PANTALLAS ---
-  function startAnimation(callback){
-    nameStep.classList.add("start-exit");
-    requestAnimationFrame(()=>{
-      nameStep.classList.add("start-exit-active");
-      setTimeout(()=>{
-        nameStep.style.display="none";
-        callback();
-        votingStep.style.display="block";
-        votingStep.classList.add("start-enter");
-        requestAnimationFrame(()=>{
-          votingStep.classList.add("start-enter-active");
-          setTimeout(()=>votingStep.className="",450);
-        });
-      },450);
-    });
+  function startAnimation(callback) {
+    // sale el nameStep
+    nameStep.classList.add("fade-out-up");
+
+    setTimeout(() => {
+      nameStep.style.display = "none";
+
+      // entra el votingStep
+      votingStep.style.display = "block";
+      votingStep.classList.add("fade-in-down");
+
+      // ejecuta la primera categoría
+      callback();
+
+      // limpiar clases después
+      setTimeout(() => {
+        votingStep.classList.remove("fade-in-down");
+      }, 450);
+
+    }, 450);
   }
 
   function animateSwap(element, callback){
@@ -165,13 +236,29 @@ voterInput.addEventListener("input", () => {
 
   // --- BOTÓN COMENZAR ---
   startBtn.addEventListener("click", async ()=>{
-    const input=document.getElementById("userName").value.trim();
-    if(input.length<2){ notify("No flaquito, no me sirve ese nombre."); return;}
-    const q=query(collection(db,"votosSecuenciales"),where("name","==",input));
-    const existing=await getDocs(q);
-    if(!existing.empty){ notify("Ya se uso ese nombre dolobu, elegi otro wachin."); return;}
-    userName=input;
-    startAnimation(()=>showCategory());
+    const input = voterInput.value.trim();
+    if (input.length < 2) {
+      notify("No flaquito, no me sirve ese nombre.");
+      return;
+    }
+
+    const q = query(collection(db,"votosSecuenciales"), where("name","==", input));
+    const existing = await getDocs(q);
+    if (!existing.empty) {
+      notify("Ya se uso ese nombre dolobu, elegi otro wachin.");
+      return;
+    }
+
+    userName = input;
+
+    // 👉 fade-out de la card
+    const nameCard = document.querySelector(".name-card");
+    nameCard.classList.add("fade-out-up");
+
+    // esperamos a que termine la animación
+    setTimeout(() => {
+      startAnimation(() => showCategory());
+    }, 400);
   });
 
   // --- FUNCION GENERAL BOTONES (hover + click) ---
@@ -420,11 +507,18 @@ function renderClipCategory(grid, category) {
     btn.addEventListener("click", e => {
       e.stopPropagation();
 
+      // setear video
       clipVideo.src = btn.dataset.video;
       clipVideo.currentTime = 0;
 
-      clipOverlay.classList.remove("hidden");
-      clipOverlay.classList.add("final-visible");
+      // mostrar overlay
+      clipOverlay.classList.remove("hidden", "fade-out-up");
+      clipOverlay.classList.add("final-visible", "fade-in-down");
+
+      // limpiar clase de animación después
+      setTimeout(() => {
+        clipOverlay.classList.remove("fade-in-down");
+      }, 350);
 
       clipVideo.play();
     });
@@ -432,15 +526,34 @@ function renderClipCategory(grid, category) {
 }
 
 
+
 function renderDefaultCategory(grid, category) {
-  grid.innerHTML = category.options.map(opt => `
-    <div class="card-option" data-value="${opt}">
-      ${opt.match(/\.(jpg|png|jpeg|gif)$/i)
-        ? `<img src="${opt}" class="option-img">`
-        : `<span>${opt}</span>`}
-    </div>
-  `).join("");
+  grid.innerHTML = category.options.map(opt => {
+    // si viene string (por si quedó algo viejo), lo normalizamos
+    if (typeof opt === "string") {
+      opt = { text: "", foto: opt };
+    }
+
+    const value = opt.text || opt.foto || "";
+
+    return `
+      <div class="card-option photo-card" data-value="${value}">
+        
+        ${opt.foto ? `
+          <div class="photo-wrapper">
+            <img src="${opt.foto}" class="option-img">
+          </div>
+        ` : ""}
+
+        ${opt.text ? `
+          <div class="option-text">${opt.text}</div>
+        ` : ""}
+      </div>
+    `;
+  }).join("");
 }
+
+
 
 function bindLyricsButtons(grid) {
   grid.querySelectorAll(".lyrics-button").forEach(btn => {
@@ -496,42 +609,71 @@ function bindCardSelection(grid) {
   });
 
   // --- OVERLAY FINAL ---
-  function showFinalScreen(){
-    const fs=document.getElementById("final-screen");
-    const thanks=document.getElementById("final-thanks");
-    fs.classList.remove("final-hidden");
-    fs.classList.add("final-visible");
-    const audio=document.getElementById("success-audio");
-    if(audio){ audio.currentTime=0; audio.volume=0.8; audio.play().catch(()=>{ const resume=()=>{ audio.play(); document.removeEventListener("click",resume); }; document.addEventListener("click",resume); });}
-    setTimeout(()=>{
-      const content=fs.querySelector(".final-content");
-      content.classList.add("fade-out");
-      setTimeout(()=>{ fs.classList.add("final-hidden"); fs.classList.remove("final-visible"); thanks.classList.add("show"); },1000);
-    },3000);
+function showFinalScreen() {
+  const fs = document.getElementById("final-screen");
+  const circle = fs.querySelector(".check-circle-bg");
+  const check = fs.querySelector(".check-path");
+
+  // reset animaciones SVG
+  circle.style.animation = "none";
+  check.style.animation = "none";
+
+  fs.classList.remove("final-hidden", "fade-out-down");
+  fs.classList.add("final-visible");
+
+  // forzar reflow para reiniciar animaciones
+  void circle.offsetWidth;
+
+  // volver a activar animaciones
+  circle.style.animation = "";
+  check.style.animation = "";
+
+  const audio = document.getElementById("success-audio");
+  if (audio) {
+    audio.currentTime = 0;
+    audio.volume = 0.8;
+    audio.play().catch(() => {});
   }
+
+  // ⏳ esperar a que se vea el check
+  setTimeout(() => {
+    fs.classList.add("fade-out-down");
+
+    // 🧹 limpiar del todo
+    setTimeout(() => {
+      fs.classList.remove("final-visible");
+      fs.classList.add("final-hidden");
+      fs.classList.remove("fade-out-down");
+    }, 400);
+
+  }, 1800); // ← tiempo visible del check
+}
+
+
+
 
 // --- FOOTER ---
 
-if (footerBtn) {
+  if (footerBtn) {
 
-  // HOVER (usa hoverSound global)
-  footerBtn.addEventListener("mouseenter", () => {
-    hoverSound.currentTime = 0;
-    hoverSound.play().catch(() => {});
-  });
+    // HOVER (usa hoverSound global)
+    footerBtn.addEventListener("mouseenter", () => {
+      hoverSound.currentTime = 0;
+      hoverSound.play().catch(() => {});
+    });
 
-  // CLICK (usa clickSound global)
-  footerBtn.addEventListener("click", (e) => {
-    e.preventDefault();
+    // CLICK (usa clickSound global)
+    footerBtn.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    clickSound.currentTime = 0;
-    clickSound.play().catch(() => {});
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
 
-    setTimeout(() => {
-      window.location.href = "admin.html";
-    }, 300);
-  });
-}
+      setTimeout(() => {
+        window.location.href = "admin.html";
+      }, 300);
+    });
+  }
 
 
 

@@ -2,8 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Monkey Awards</title>
-  <link rel="stylesheet" href="estilos/styles.css">
+  <link rel="stylesheet" href="estilos/admin.css">
   <link rel="icon" type="image/png" href="fotos/file2.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,65 +18,61 @@
 
 </head>
 
-<body>
+<body class="admin-page">
 
-<header>
-  <h1>MONKEY AWARDS — PANEL ADMIN</h1>
-  <p>Visualización en tiempo real de los votos</p>
-</header>
+  <header>
+    <h1>MONKEY AWARDS — PANEL ADMIN</h1>
+    <p>Visualización en tiempo real de los votos</p>
+  </header>
 
-<main class="slide-container">
+  <main class="slide-container">
 
-  <!-- LOGIN -->
-  <section id="auth" class="card slide-center">
-    <h2>Iniciar sesión</h2>
+    <!-- LOGIN -->
+    <section id="auth" class="card slide-center">
+      <h2>Iniciar sesión</h2>
+      <input id="email" type="email" placeholder="Email del administrador">
+      <input id="password" type="password" placeholder="Contraseña">
+      <button id="loginBtn">Ingresar</button>
+      <p id="authMsg"></p>
+    </section>
 
-    <input id="email" type="email" placeholder="Email del administrador">
-    <input id="password" type="password" placeholder="Contraseña">
-
-    <button id="loginBtn">Ingresar</button>
-    <p id="authMsg"></p>
-  </section>
-
-  <!-- RESULTADOS -->
-  <section id="results" class="card slide-right">
-      
-    <div class="admin-bar">
-        <button id="logoutBtn" class="logout-btn">Cerrar sesión</button>
-    </div>
-
-    <h2 class="results-title">Resultados de votación</h2>
-
-    <div class="carousel-wrapper">
-
-      <button class="carousel-btn left" id="prevBtn">&#10094;</button>
-
-      <div class="carousel-window">
-          <div class="carousel-track" id="carouselTrack">
-              <!-- JS inserta las slides acá -->
-          </div>
+    <!-- RESULTADOS -->
+    <section id="results" class="card slide-right">
+        
+      <div class="admin-bar">
+          <button id="logoutBtn" class="logout-btn">Cerrar sesión</button>
       </div>
 
-      <button class="carousel-btn right" id="nextBtn">&#10095;</button>
+      <h2 class="results-title">Resultados de votación</h2>
 
-    </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn left" id="prevBtn">&#10094;</button>
+        <div class="carousel-window">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- JS inserta las slides acá -->
+            </div>
+        </div>
+        <button class="carousel-btn right" id="nextBtn">&#10095;</button>
+      </div>
 
-    <div id="carouselDots" class="carousel-dots"></div>
+      <div id="carouselDots" class="carousel-dots"></div>
 
-    <audio id="carousel-move-sound" src="sonidos/slide2.wav" preload="auto"></audio>
-    <audio id="carousel-hover-sound" src="sonidos/hover.wav" preload="auto"></audio>
+      <audio id="carousel-move-sound" src="sonidos/slide2.wav" preload="auto"></audio>
+      <audio id="carousel-hover-sound" src="sonidos/hover.wav" preload="auto"></audio>
+    </section>
+  </main>
 
-  </section>
-</main>
-
-<footer>
-  <button id="footerBtn" class="footer-button">Volver a votaciones</button>
-  <audio id="footer-sound" src="sonidos/hover.wav" preload="auto"></audio>
-  <audio id="click-sound" src="sonidos/footer.mp3" preload="auto"></audio>
-</footer>
+  <footer>
+    <button id="footerBtn" class="footer-button">Volver a votaciones</button>
+    <audio id="footer-sound" src="sonidos/hover.wav" preload="auto"></audio>
+    <audio id="click-sound" src="sonidos/footer.mp3" preload="auto"></audio>
+  </footer>
 
 
-<script type="module" src="javas/admin.js"></script>
-<script type="module" src="javas/app.js"></script>
+  <script type="module" src="javas/admin.js"></script>
+  <script type="module" src="javas/app.js"></script>
+  <audio id="notify-error-sound" src="sonidos/error.wav"></audio>
+  <audio id="notify-success-sound" src="sonidos/success.mp3"></audio>
+  <div id="notifyBox" class="notify-box"></div>
 </body>
 </html>
