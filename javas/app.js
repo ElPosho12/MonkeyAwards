@@ -24,12 +24,13 @@ try {
 // --- CATEGORÍAS ---
 const categories = [
   { name: "JUNTADA DEL AÑO", options: [
-    {text: "Cumple de agus", foto:"fotos/Juntadas/juntada1.jpeg"},
+    {text: "Cumple de agus (agus)", foto:"fotos/Juntadas/juntada1.jpeg"},
     {text:"casa de bruno (escondidas turbias)", foto:"fotos/Juntadas/juntada2.jpeg"},
     {text:"casa de fafa (caipirinha)", foto:"fotos/Juntadas/juntada3.jfif"}, 
-    {text:"Monkey Awards 2024(posho)", foto:"fotos/Juntadas/juntada4.jfif"}
-    
-  
+    {text:"Monkey Awards 2024 (posho)", foto:"fotos/Juntadas/juntada4.jfif"},
+    {text:"casa de bruno 2 (maquina de cortar pelo)", foto:"fotos/Juntadas/juntada5.jfif"},
+    {text:"cumple del paisa (paisa)", foto:"fotos/Juntadas/juntada6.jfif"},
+    {text:"cumple de bruno (bruno)", foto:"fotos/Juntadas/juntada7.jfif"}
   ] 
   },
   { name: "CLIP DEL AÑO", options: [
@@ -37,7 +38,10 @@ const categories = [
       { text: "no chau, cague (bruno)", video: "clips/clip2.mp4" },
       { text: "thunderbolt (fafa)", video: "clips/clip3.mp4" },
       { text: "monardo (maxi)", video: "clips/clip4.mp4" },
-      { text: "un triciclo (agus)", video: "clips/clip5.mp4" }
+      { text: "un triciclo (agus)", video: "clips/clip5.mp4" },
+      { text: "pendejo hdp (agus)", video: "clips/clip6.mp4" },
+      { text: "empezamos bien (maxi)", video: "clips/clip7.mp4" },
+      { text: "me metieron un palazo (fafa)", video: "clips/clip8.mp4" }
     ] 
   },
   {   name: "FOTO DEL AÑO",
@@ -45,16 +49,24 @@ const categories = [
     { text: "Previa pinar (agus)", foto: "fotos/Fotos/foto1.jfif" },
     { text: "fafa en el baño (bruno)", foto: "fotos/Fotos/foto2.jfif" },
     { text: "iago aspas ahmud (fafa)", foto: "fotos/Fotos/foto3.jpeg" },
-    { text: "posho silenciado (posho)", foto: "fotos/Fotos/foto4.jpg" },
-    { text: "almorzando (paisa)", foto: "fotos/Fotos/foto5.jpeg" }
+    { text: "triangular (posho)", foto: "fotos/Fotos/foto4.jpeg" },
+    { text: "almorzando (paisa)", foto: "fotos/Fotos/foto5.jpeg" },
+    { text: "soy profe (bruno)", foto: "fotos/Fotos/foto6.jpeg" },
+    { text: "posho silenciado (posho)", foto: "fotos/Fotos/foto7.jpeg" },
+    { text: "lengua nazi (fafa)", foto: "fotos/Fotos/foto8.jfif" },
+    { text: "escoliosis (juani)", foto: "fotos/Fotos/foto9.jfif" },
+    { text: "cute (paisa)", foto: "fotos/Fotos/foto10.jpeg" },
+    { text: "chiquito (agus)", foto: "fotos/Fotos/foto10.jfif" }
   ]
   },
   { name: "FAIL DEL AÑO", options: [
-    { text: "fafa se olvida la entrada(fafa)", foto: "fotos/Fail/fail1.jpeg" },
+    { text: "fafa se olvida la entrada (fafa)", foto: "fotos/Fail/fail1.jpeg" },
     { text: "caida de jarra en cumple de agus (bruno)", foto: "fotos/Fail/fail2.jfif" },
-    { text: "corte de pelo al posho (agus)", foto: "fotos/Fail/fail3." },
-    { text: "juani errando la tortilla(juani)", foto: "fotos/Fail/fail4.jpeg" },
-    { text: "pegarle las hojas a fafa(maxi)", foto: "fotos/Fail/fail5.jpeg" },
+    { text: "corte de pelo al posho (agus)", foto: "fotos/Fail/fail3.jfif" },
+    { text: "juani errando la tortilla (juani)", foto: "fotos/Fail/fail4.jpeg" },
+    { text: "pegarle las hojas a fafa (maxi)", foto: "fotos/Fail/fail5.jpeg" },
+    { text: "mono comer banana y deleitarse (fafa)", foto: "fotos/Fail/fail6.jpg" },
+    { text: "agus quebrando en JLL (agus)", foto: "fotos/Fail/fail7.jfif" }
   ] 
   },
   { name: "MONADA DEL AÑO", options: [
@@ -62,7 +74,9 @@ const categories = [
     { text: "espalda escrita de fafa (juani)", foto: "fotos/Monadas/monada2.jfif" },
     { text: "fafa con remera rota en AUD (bruno)", foto: "fotos/Monadas/monada3.jfif" },
     { text: "cascotes en mochila (posho)", foto: "fotos/Monadas/monada4.jpeg" },
-    { text: "Alfajor en la remera de fafa(paisa)", foto: "fotos/Monadas/monada5.jfif" }
+    { text: "Alfajor en la remera de fafa (paisa)", foto: "fotos/Monadas/monada5.jfif" },
+    {text: "Agus encintado (agus)", foto: "fotos/Monadas/monada6.jpeg"},
+    {text: "mesa llena de tinta (fafa)", foto: "fotos/Monadas/monada7.jpeg"},
   ] 
   },
   { name: "CANCION DEL AÑO", options: [
@@ -75,7 +89,7 @@ const categories = [
     { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
     { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
     { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "ABUELO", foto: "fotos/monos/abuelo.jpeg" },
     { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
     { text: "POSHO", foto: "fotos/monos/posho.jfif" },
     { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
@@ -87,7 +101,7 @@ const categories = [
     { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
     { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
     { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "ABUELO", foto: "fotos/monos/abuelo.jpeg" },
     { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
     { text: "POSHO", foto: "fotos/monos/posho.jfif" },
     { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
@@ -97,7 +111,7 @@ const categories = [
     { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
     { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
     { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "ABUELO", foto: "fotos/monos/abuelo.jpeg" },
     { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
     { text: "POSHO", foto: "fotos/monos/posho.jfif" },
     { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
@@ -107,7 +121,7 @@ const categories = [
     { text: "BRUNO", foto: "fotos/monos/bruno.jpeg" },
     { text: "MAXI", foto: "fotos/monos/maxi.jpeg" },
     { text: "AGUS", foto: "fotos/monos/tito.jpeg" },
-    { text: "ABU", foto: "fotos/monos/abuelo.jpeg" },
+    { text: "ABUELO", foto: "fotos/monos/abuelo.jpeg" },
     { text: "FAFA", foto: "fotos/monos/fafa.jfif" },
     { text: "POSHO", foto: "fotos/monos/posho.jfif" },
     { text: "PAISA", foto: "fotos/monos/paisa.jfif" },
@@ -595,7 +609,7 @@ function bindCardSelection(grid) {
     const selected=[...document.querySelectorAll(".card-option.selected")].map(c=>c.dataset.value);
     const c=categories[index];
     const max=singleVoteCategories.includes(c.name)?1:2;
-    if(selected.length!==max){ notify(`Debes elegir exactamente ${max} opción(es).`); return;}
+    if(selected.length!==max){ notify(`elegi bien bobo`); return;}
     if(nextSound){ nextSound.currentTime=0; nextSound.play().catch(()=>{});}
     votes[c.name]=selected;
     index++;
