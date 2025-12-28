@@ -46,16 +46,16 @@ const categories = [
   },
   {   name: "FOTO DEL AÑO",
   options: [
-    { text: "Previa pinar (agus)", foto: "fotos/Fotos/foto1.jfif" },
+    { text: "Previa pinar (agus, posho y fafa)", foto: "fotos/Fotos/foto1.jfif" },
     { text: "fafa en el baño (bruno)", foto: "fotos/Fotos/foto2.jfif" },
-    { text: "iago aspas ahmud (fafa)", foto: "fotos/Fotos/foto3.jpeg" },
+    { text: "iago aspas ahmud (jungle sin agus y maxi)", foto: "fotos/Fotos/foto3.jpeg" },
     { text: "triangular (posho)", foto: "fotos/Fotos/foto4.jpeg" },
-    { text: "almorzando (paisa)", foto: "fotos/Fotos/foto5.jpeg" },
-    { text: "soy profe (bruno)", foto: "fotos/Fotos/foto6.jpeg" },
-    { text: "posho silenciado (posho)", foto: "fotos/Fotos/foto7.jpeg" },
+    { text: "almorzando (paisa y fafa)", foto: "fotos/Fotos/foto5.jpeg" },
+    { text: "soy profe (bruno, fafa y juani)", foto: "fotos/Fotos/foto6.jpeg" },
+    { text: "posho silenciado (posho y paisa)", foto: "fotos/Fotos/foto7.jpeg" },
     { text: "lengua nazi (fafa)", foto: "fotos/Fotos/foto8.jfif" },
     { text: "escoliosis (juani)", foto: "fotos/Fotos/foto9.jfif" },
-    { text: "cute (paisa)", foto: "fotos/Fotos/foto10.jpeg" },
+    { text: "cute (paisa y agus)", foto: "fotos/Fotos/foto10.jpeg" },
     { text: "chiquito (agus)", foto: "fotos/Fotos/foto10.jfif" }
   ]
   },
@@ -76,7 +76,7 @@ const categories = [
     { text: "cascotes en mochila (posho)", foto: "fotos/Monadas/monada4.jpeg" },
     { text: "Alfajor en la remera de fafa (paisa)", foto: "fotos/Monadas/monada5.jfif" },
     {text: "Agus encintado (agus)", foto: "fotos/Monadas/monada6.jpeg"},
-    {text: "mesa llena de tinta (fafa)", foto: "fotos/Monadas/monada7.jpeg"},
+    {text: "mesa llena de tinta (fafa y bruno)", foto: "fotos/Monadas/monada7.jpeg"},
   ] 
   },
   { name: "CANCION DEL AÑO", options: [
