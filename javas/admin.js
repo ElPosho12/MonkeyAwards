@@ -5,7 +5,7 @@
 // ===============================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
 // ===============================
 //  CONFIG FIREBASE
@@ -224,7 +224,13 @@ async function loadResults() {
   track.innerHTML = "Cargando...";
 
   try {
-    const snap = await getDocs(collection(db, "votosSecuenciales"));
+    const q = query(
+    collection(db, "votosSecuenciales"),
+    orderBy("timestamp", "asc")   // 👈 primer votó → último votó
+    );
+
+    const snap = await getDocs(q);
+
 
     if (!snap.size) {
       track.innerHTML = "<p>No hay votos aún.</p>";
