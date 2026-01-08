@@ -201,8 +201,6 @@ const labelMap = {
     "fotos/monnnkey.jpg": "Paisa",
     "fotos/juan.jpg": "Juan",
     "fotos/pedro.jpg": "Pedro",
-    "": "",
-    "": ""
   },
   "FAIL DEL AÑO": {
     "fails/caida1.mp4": "La caída épica",
@@ -216,38 +214,59 @@ async function loadResults() {
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
 
-  if (!track || !dotsContainer) {
-    console.error("Faltan elementos del carrusel.");
-    return;
-  }
-
   track.innerHTML = "Cargando...";
+  dotsContainer.innerHTML = "";
 
   try {
     const q = query(
-    collection(db, "votosSecuenciales"),
-    orderBy("timestamp", "asc")   // 👈 primer votó → último votó
+      collection(db, "votosSecuenciales"),
+      orderBy("timestamp", "asc")
     );
 
     const snap = await getDocs(q);
-
 
     if (!snap.size) {
       track.innerHTML = "<p>No hay votos aún.</p>";
       return;
     }
 
-    track.innerHTML = "";
-    dotsContainer.innerHTML = "";
+    // 1️⃣ ACUMULAR VOTOS
+    const categoryCounts = {};
+    ordenCategorias.forEach(cat => (categoryCounts[cat] = {}));
 
-    const slides = [];
-    let idx = 0;
+    let voterIndex = 0;
 
     snap.forEach(doc => {
       const data = doc.data();
-      const nombre = data.name ?? "Sin nombre";
-      const votos = data.votes ?? {};
+      const votes = data.votes || {};
 
+      // ➜ primeros 9 votantes pesan 1.5
+      const weight = voterIndex < 9 ? 1.5 : 1;
+      voterIndex++;
+
+      Object.keys(votes).forEach(cat => {
+        const value = votes[cat];
+        const values = Array.isArray(value) ? value : [value];
+
+        values.forEach(v => {
+          const label =
+            (labelMap[cat] && labelMap[cat][v]) ? labelMap[cat][v] : v;
+
+          if (!categoryCounts[cat][label]) {
+            categoryCounts[cat][label] = 0;
+          }
+
+          categoryCounts[cat][label] += weight;
+        });
+      });
+    });
+
+    // 2️⃣ CONSTRUIR SLIDES
+    track.innerHTML = "";
+    const slides = [];
+    let idx = 0;
+
+    ordenCategorias.forEach(cat => {
       const slide = document.createElement("div");
       slide.className = "carousel-slide";
 
@@ -255,175 +274,93 @@ async function loadResults() {
       box.className = "voter-box";
 
       const title = document.createElement("h3");
-      title.textContent = nombre;
+      title.textContent = cat;
       box.appendChild(title);
 
-      const list = document.createElement("ul");
-      const keys = ordenCategorias.filter(cat => cat in votos);
+   const options = Object.entries(categoryCounts[cat]).sort((a, b) => b[1] - a[1]);
+const max = Math.max(...options.map(([_, v]) => v), 0);
 
-      if (!keys.length) {
-        const li = document.createElement("li");
-        li.textContent = "No votó en ninguna categoría.";
-        list.appendChild(li);
-      } else {
-        keys.forEach(cat => {
-          const li = document.createElement("li");
-          let value = votos[cat];
-          // Si hay un mapa de labels para esta categoría
-          if (labelMap[cat]) {
-            if (Array.isArray(value)) {
-              value = value.map(v => labelMap[cat][v] || v).join(", ");
-            } else {
-              value = labelMap[cat][value] || value;
-            }
-          }
-          li.innerHTML = `<strong>${cat}:</strong> ${value}`;
-          list.appendChild(li);
-        });
+const chart = document.createElement("div");
+chart.className = "chart";
 
-      }
+if (!options.length) {
+  chart.innerHTML = `<p>Sin votos todavía.</p>`;
+} else {
+  chart.innerHTML = options.map(([option, count], i) => `
+    <div class="bar-row">
+      
+      <div class="bar-label">
+        ${i === 0 ? "🥇 " : i === 1 ? "🥈 " : ""}${option}
+      </div>
 
-    box.appendChild(list);
-    slide.appendChild(box);
-    track.appendChild(slide);
+      <div class="bar-track">
+        <div class="bar" style="width:${max ? (count / max) * 100 : 0}%"></div>
+      </div>
 
-    slides.push(slide);
-    const dot = document.createElement("span");
-    dot.className = idx === 0 ? "active" : "";
-    dot.dataset.index = idx;
-    dotsContainer.appendChild(dot);
-    idx++;
+      <div class="bar-value">
+        ${count % 1 === 0 ? count : count.toFixed(1)}
+      </div>
+
+    </div>
+  `).join("");
+}
+
+box.appendChild(chart);
+
+      slide.appendChild(box);
+      track.appendChild(slide);
+
+      const dot = document.createElement("span");
+      dot.className = idx === 0 ? "active" : "";
+      dot.dataset.index = idx;
+      dotsContainer.appendChild(dot);
+
+      slides.push(slide);
+      idx++;
     });
-  let current = 0;
 
-  function updateCarousel() {
-    if (!slides.length) return;
-    track.style.transform = `translateX(-${current * 100}%)`;
+    // 3️⃣ CONTROLES DEL CARRUSEL
+    let current = 0;
 
-    const allDots = dotsContainer.querySelectorAll("span");
-    allDots.forEach(d => d.classList.remove("active"));
-    dotsContainer.querySelector(`span[data-index="${current}"]`)?.classList.add("active");
-  }
+    function updateCarousel() {
+      track.style.transform = `translateX(-${current * 100}%)`;
 
-    // ======================
-    // EVENTOS DE BOTONES
-    // ======================
-    prevBtn.addEventListener("mouseenter", () => {
-      hoverSound.currentTime = 0;
-      hoverSound.play();
-    });
-    nextBtn.addEventListener("mouseenter", () => {
-      hoverSound.currentTime = 0;
-      hoverSound.play();
-    });
+      dotsContainer.querySelectorAll("span")
+        .forEach(d => d.classList.remove("active"));
+
+      dotsContainer.querySelector(`span[data-index="${current}"]`)
+        ?.classList.add("active");
+    }
 
     prevBtn.onclick = () => {
-      slideSound.currentTime = 0;
-      slideSound.play();
+      slideSound.currentTime = 0; slideSound.play();
       current = (current - 1 + slides.length) % slides.length;
       updateCarousel();
     };
+
     nextBtn.onclick = () => {
-      slideSound.currentTime = 0;
-      slideSound.play();
+      slideSound.currentTime = 0; slideSound.play();
       current = (current + 1) % slides.length;
       updateCarousel();
     };
 
-    // ======================
-    // DOTS
-    // ======================
-    dotsContainer.querySelectorAll("span").forEach(dot => {
+    dotsContainer.querySelectorAll("span").forEach(dot =>
       dot.addEventListener("click", () => {
-        slideSound.currentTime = 0;
-        slideSound.play();
-        current = parseInt(dot.dataset.index, 10);
+        slideSound.currentTime = 0; slideSound.play();
+        current = parseInt(dot.dataset.index);
         updateCarousel();
-      });
-    });
-
-    // ======================
-    // TECLAS IZQ/DER
-    // ======================
-    document.addEventListener("keydown", (e) => {
-      if (!slides.length) return;
-
-      if (e.key === "ArrowRight") {
-        slideSound.currentTime = 0;
-        slideSound.play();
-        current = (current + 1) % slides.length;
-        updateCarousel();
-      }
-      if (e.key === "ArrowLeft") {
-        slideSound.currentTime = 0;
-        slideSound.play();
-        current = (current - 1 + slides.length) % slides.length;
-        updateCarousel();
-      }
-    });
+      })
+    );
 
     updateCarousel();
 
-    // ======================
-// SWIPE MOBILE
-// ======================
-const carouselWindow = document.querySelector(".carousel-window");
-
-// ======================
-// TOUCH + INERCIA iOS
-// ======================
-let startX = 0;
-let currentX = 0;
-let dragging = false;
-let deltaX = 0;
-
-track.addEventListener("touchstart", (e) => {
-  if (e.touches.length !== 1) return;
-
-  startX = e.touches[0].clientX;
-  dragging = true;
-  deltaX = 0;
-
-  track.style.transition = "none";
-}, { passive: true });
-
-track.addEventListener("touchmove", (e) => {
-  if (!dragging) return;
-
-  currentX = e.touches[0].clientX;
-  deltaX = currentX - startX;
-
-  const percent = (deltaX / track.offsetWidth) * 100;
-  track.style.transform = `translateX(calc(-${current * 100}% + ${percent}%))`;
-}, { passive: true });
-
-track.addEventListener("touchend", () => {
-  if (!dragging) return;
-  dragging = false;
-
-  track.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
-
-  const threshold = track.offsetWidth * 0.18;
-
-  if (deltaX > threshold && current > 0) {
-    slideSound.currentTime = 0;
-    slideSound.play();
-    current--;
-  } else if (deltaX < -threshold && current < slides.length - 1) {
-    slideSound.currentTime = 0;
-    slideSound.play();
-    current++;
-  }
-
-  updateCarousel();
-});
-
-
   } catch (err) {
-    console.error("Error cargando votos:", err);
+    console.error(err);
     track.innerHTML = "<p>Error cargando resultados.</p>";
   }
 }
+
+
 
 // ===============================
 //  SONIDO FOOTER + NAVEGACIÓN
