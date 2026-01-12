@@ -810,6 +810,7 @@ button *,
 #nextBtn,
 #footerBtn {
   color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
 }
 
 button:hover,
@@ -819,6 +820,14 @@ button:hover,
 #nextBtn:hover,
 #footerBtn:hover {
   color: #222 !important;
+}
+
+.card-option.selected button,
+.card-option.selected .clip-button,
+.card-option.selected .play-btn,
+.card-option.selected .lyrics-button {
+  color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
 }
 
 /* =========================
