@@ -860,6 +860,72 @@ button *,
   -webkit-text-fill-color: #222 !important;
 }
 
+/* ================================
+   RESET DE BOTONES DEL NAVEGADOR
+   (mata el ButtonText blanco)
+================================ */
+
+button,
+input[type="button"],
+input[type="submit"] {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ================================
+   BOTONES MONKEY AWARDS
+================================ */
+
+button,
+.clip-button,
+.play-btn,
+.lyrics-button,
+#nextBtn,
+#footerBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 28px;
+  border-radius: 999px;
+
+  background: #d8a415;
+  color: #222;
+  -webkit-text-fill-color: #222;
+
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+/* Hover */
+button:hover,
+.clip-button:hover,
+.play-btn:hover,
+.lyrics-button:hover,
+#nextBtn:hover,
+#footerBtn:hover {
+  background: #ffdd55;
+  color: #111;
+  -webkit-text-fill-color: #111;
+  transform: scale(1.05);
+}
+
+/* Botón dentro de card seleccionada */
+.card-option.selected button,
+.card-option.selected .clip-button,
+.card-option.selected .play-btn,
+.card-option.selected .lyrics-button {
+  background: #222;
+  color: #d8a415;
+  -webkit-text-fill-color: #d8a415;
+  border: 2px solid #d8a415;
+}
+
 
 /* =========================
    RESPONSIVE
