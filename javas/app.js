@@ -339,29 +339,52 @@ voterInput.addEventListener("input", () => {
      ✅ SELECCIÓN DE CARDS
   ===================================================== */
   bindCardSelection(grid);
+// después de bindCardSelection(grid);
+
+const saved = votes[c.name] || [];
+
+grid.querySelectorAll(".card-option").forEach(card => {
+  if (saved.includes(card.dataset.value)) {
+    card.classList.add("selected");
+  }
+});
+
+
 }
 
   // --- TOGGLE CARD ---
-  function toggleCard(card){
-    const c=categories[index];
-    const max=singleVoteCategories.includes(c.name)?1:2;
-    const selectedCards=document.querySelectorAll(".card-option.selected");
-    const alreadySelected=card.classList.contains("selected");
+function toggleCard(card){
+  const c = categories[index];
+  const max = singleVoteCategories.includes(c.name) ? 1 : 2;
+  const value = card.dataset.value;
 
-    if(alreadySelected){
-      card.classList.remove("selected");
+  if (!votes[c.name]) votes[c.name] = [];
+
+  const list = votes[c.name];
+  const idx = list.indexOf(value);
+
+  // quitar
+  if (idx !== -1) {
+    list.splice(idx, 1);
+  } 
+  // agregar
+  else {
+    if (list.length >= max) {
+      notify(`Solo puedes seleccionar ${max} opción(es)`);
       return;
     }
-
-    if(max===1){
-      selectedCards.forEach(c=>c.classList.remove("selected"));
-      card.classList.add("selected");
-      return;
-    }
-
-    if(selectedCards.length>=max){ notify(`Solo puedes seleccionar ${max} opción(es)`); return; }
-    card.classList.add("selected");
+    list.push(value);
   }
+
+  // refrescar UI
+  document.querySelectorAll(".card-option").forEach(c => {
+    c.classList.toggle(
+      "selected",
+      list.includes(c.dataset.value)
+    );
+  });
+}
+
 
 function renderSongCategory(grid, category) {
   grid.innerHTML = `
