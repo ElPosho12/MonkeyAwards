@@ -802,7 +802,24 @@ background-color: #d8a415;
   color: #222 !important;
 }
 
+button,
+button *,
+.clip-button,
+.play-btn,
+.lyrics-button,
+#nextBtn,
+#footerBtn {
+  color: #222 !important;
+}
 
+button:hover,
+.clip-button:hover,
+.play-btn:hover,
+.lyrics-button:hover,
+#nextBtn:hover,
+#footerBtn:hover {
+  color: #222 !important;
+}
 
 /* =========================
    RESPONSIVE
