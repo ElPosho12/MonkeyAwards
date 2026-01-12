@@ -803,15 +803,14 @@ background-color: #d8a415;
 }
 
 button,
-button *,
 .clip-button,
 .play-btn,
 .lyrics-button,
 #nextBtn,
 #footerBtn {
-  color: #222 !important;
-  -webkit-text-fill-color: #222 !important;
+  color: #222;
 }
+
 
 button:hover,
 .clip-button:hover,
@@ -819,29 +818,17 @@ button:hover,
 .lyrics-button:hover,
 #nextBtn:hover,
 #footerBtn:hover {
-  color: #222 !important;
+  color: #222;
 }
+
 
 .card-option.selected button,
 .card-option.selected .clip-button,
 .card-option.selected .play-btn,
 .card-option.selected .lyrics-button {
-  color: #222 !important;
-  -webkit-text-fill-color: #222 !important;
+  color: #222;
 }
 
-button {
-  display:inline-block;
-  background: #d8a415;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 25px;
-  color: #222;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
 
 /* =========================
    RESPONSIVE
