@@ -784,6 +784,24 @@ background-color: #d8a415;
   }
 }
 
+.card-option.selected {
+  background: #d8a415 !important;
+  border-color: #ffdd55 !important;
+}
+
+.card-option.selected .option-text,
+.card-option.selected .clip-title {
+  color: #222;
+}
+
+.card-option.selected button,
+.card-option.selected .clip-button,
+.card-option.selected .play-btn,
+.card-option.selected .lyrics-button {
+  background: #222;
+  color: #d8a415;
+  border: 2px solid #d8a415;
+}
 
 /* =========================
    RESPONSIVE
