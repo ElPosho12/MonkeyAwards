@@ -325,26 +325,11 @@ button:hover {
   box-shadow: 0 12px 12px rgba(0, 0, 0, 0.25);
 }
 
-.card-option.selected {
-  background: #d8a415;
-  border-color: #ffdd55;
-  transform: scale(1.1);
-}
 
 /* texto */
 .card-option.selected .option-text,
 .card-option.selected .clip-title {
   color: #222;
-}
-
-/* botones dentro de la card */
-.card-option.selected button,
-.card-option.selected .clip-button,
-.card-option.selected .play-btn,
-.card-option.selected .lyrics-button {
-  background: #222;
-  color: #d8a415;
-  border: 2px solid #d8a415;
 }
 
 /* =========================
@@ -433,11 +418,6 @@ button:hover {
   position: relative; 
 }
 
-.card-option.selected .clip-button {
-  background: #222 !important;
-  color: #d8a415 !important;
-}
-
 .play-btn.active-btn {
   transform: scale(1.15);
   background: #f8c531;
@@ -446,11 +426,6 @@ button:hover {
 .play-btn {
   transition: transform 0.2s ease;
   margin: 10px;
-}
-
-.card-option.selected .play-btn {
-  background: #222;
-  color: #d8a415;
 }
 
 .card-option.selected .lyrics-button {
