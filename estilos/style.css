@@ -686,7 +686,7 @@ background-color: #d8a415;
 .close-lyrics {
   background: transparent;
   color: #fff;
-  border: 2px, solid #d8a415;
+  border: 2px solid #d8a415;
   font-size: 30px;
   cursor: pointer;
   float: right;
