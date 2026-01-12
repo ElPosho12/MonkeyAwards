@@ -808,7 +808,8 @@ button,
 .lyrics-button,
 #nextBtn,
 #footerBtn {
-  color: #222;
+  color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
 }
 
 
@@ -818,7 +819,8 @@ button:hover,
 .lyrics-button:hover,
 #nextBtn:hover,
 #footerBtn:hover {
-  color: #222;
+  color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
 }
 
 
@@ -826,7 +828,8 @@ button:hover,
 .card-option.selected .clip-button,
 .card-option.selected .play-btn,
 .card-option.selected .lyrics-button {
-  color: #222;
+  color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
 }
 
 
