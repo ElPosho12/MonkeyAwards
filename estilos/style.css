@@ -832,6 +832,34 @@ button:hover,
   -webkit-text-fill-color: #222 !important;
 }
 
+/* ===============================
+   KILL BROWSER BUTTON STYLING
+   =============================== */
+
+button,
+#nextBtn,
+#footerBtn,
+.clip-button,
+.play-btn,
+.lyrics-button {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #d8a415 !important;
+  color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
+}
+
+/* El texto interno del botón */
+button *,
+.clip-button *,
+.play-btn *,
+.lyrics-button *,
+#nextBtn *,
+#footerBtn * {
+  color: #222 !important;
+  -webkit-text-fill-color: #222 !important;
+}
+
 
 /* =========================
    RESPONSIVE
