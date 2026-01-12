@@ -799,6 +799,26 @@ background-color: #d8a415;
   }
 }
 
+/* FORCE GOLD THEME */
+.card-option.selected {
+  background: #d8a415 !important;
+  border-color: #ffdd55 !important;
+}
+
+.card-option.selected * {
+  color: #222 !important;
+}
+
+.card-option.selected button,
+.card-option.selected .clip-button,
+.card-option.selected .play-btn,
+.card-option.selected .lyrics-button {
+  background: #222 !important;
+  color: #d8a415 !important;
+  border: 2px solid #d8a415 !important;
+}
+
+
 /* =========================
    RESPONSIVE
    ========================= */
