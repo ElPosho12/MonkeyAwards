@@ -799,16 +799,33 @@ background-color: #d8a415;
   }
 }
 
-/* FORCE GOLD THEME */
+/* =========================
+   GOLD THEME - FIX REAL
+   ========================= */
+
+/* Card seleccionada */
 .card-option.selected {
   background: #d8a415 !important;
   border-color: #ffdd55 !important;
+  transform: scale(1.1);
 }
 
-.card-option.selected * {
-  color: #222 !important;
+/* Texto normal dentro de la card */
+.card-option.selected .option-text,
+.card-option.selected .clip-title,
+.card-option.selected p,
+.card-option.selected span {
+  color: #222;
 }
 
+/* Imágenes */
+.card-option.selected .option-img {
+  transform: scale(1.07);
+}
+
+/* -------------------------
+   BOTONES dentro de la card
+   ------------------------- */
 .card-option.selected button,
 .card-option.selected .clip-button,
 .card-option.selected .play-btn,
@@ -817,6 +834,27 @@ background-color: #d8a415;
   color: #d8a415 !important;
   border: 2px solid #d8a415 !important;
 }
+
+/* Hover de botones dentro de card seleccionada */
+.card-option.selected button:hover,
+.card-option.selected .clip-button:hover,
+.card-option.selected .play-btn:hover,
+.card-option.selected .lyrics-button:hover {
+  background: #111 !important;
+  color: #ffdd55 !important;
+  border-color: #ffdd55 !important;
+}
+
+/* -------------------------
+   Íconos, SVG, etc
+   ------------------------- */
+.card-option.selected svg,
+.card-option.selected svg path,
+.card-option.selected i {
+  fill: #222;
+  color: #222;
+}
+
 
 
 /* =========================
