@@ -803,56 +803,28 @@ background-color: #d8a415;
    GOLD THEME - FIX REAL
    ========================= */
 
-/* Card seleccionada */
 .card-option.selected {
-  background: #d8a415 !important;
-  border-color: #ffdd55 !important;
-  transform: scale(1.1);
+  border: 3px solid #d8a415 !important;
+  background: linear-gradient(145deg, #3a2a00, #1f1a05) !important;
+  box-shadow:
+    0 0 10px rgba(216,164,21,0.6),
+    0 0 25px rgba(216,164,21,0.35);
+  transform: scale(1.05);
 }
 
-/* Texto normal dentro de la card */
 .card-option.selected .option-text,
-.card-option.selected .clip-title,
-.card-option.selected p,
-.card-option.selected span {
-  color: #222;
+.card-option.selected .clip-title {
+  color: #ffd85e !important;
+  font-weight: 700;
 }
 
-/* Imágenes */
-.card-option.selected .option-img {
-  transform: scale(1.07);
+.card-option.selected img {
+  filter: drop-shadow(0 0 8px rgba(216,164,21,0.6));
 }
 
-/* -------------------------
-   BOTONES dentro de la card
-   ------------------------- */
-.card-option.selected button,
-.card-option.selected .clip-button,
-.card-option.selected .play-btn,
-.card-option.selected .lyrics-button {
-  background: #222 !important;
-  color: #d8a415 !important;
-  border: 2px solid #d8a415 !important;
-}
-
-/* Hover de botones dentro de card seleccionada */
-.card-option.selected button:hover,
-.card-option.selected .clip-button:hover,
-.card-option.selected .play-btn:hover,
-.card-option.selected .lyrics-button:hover {
-  background: #111 !important;
-  color: #ffdd55 !important;
-  border-color: #ffdd55 !important;
-}
-
-/* -------------------------
-   Íconos, SVG, etc
-   ------------------------- */
-.card-option.selected svg,
-.card-option.selected svg path,
-.card-option.selected i {
-  fill: #222;
-  color: #222;
+.card-option.selected button {
+  background: #d8a415 !important;
+  color: #222 !important;
 }
 
 
